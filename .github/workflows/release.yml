@@ -1,0 +1,61 @@
+name: Build and Release .deb Package
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout the repo
+      uses: actions/checkout@v2
+
+    - name: Set up packaging environment
+      run: sudo apt-get install -y dpkg-dev
+
+    - name: Create package directories
+      run: |
+        mkdir -p build/package
+        mkdir -p build/control
+        mkdir -p build/data
+
+    - name: Copy files into build/control and build/data
+      run: |
+        cp -r DEBIAN/* build/control/
+        cp -r src/usr build/data/usr
+        cp -r src/opt build/data/opt
+
+    - name: Create control.tar.gz
+      run: |
+        cd build/control
+        tar czvf ../control.tar.gz .
+
+    - name: Create data.tar.gz
+      run: |
+        cd build/data
+        tar czvf ../data.tar.gz .
+
+    - name: Create debian-binary file
+      run: echo '2.0' > build/debian-binary
+
+    - name: Package .deb using ar
+      run: |
+        cd build
+        ar rcs ../hlt4000dw-driver_${{ github.ref_name }}.deb control.tar.gz data.tar.gz debian-binary
+
+    - name: Upload the .deb file
+      uses: actions/upload-artifact@v2
+      with:
+        name: hlt4000dw-driver
+        path: hlt4000dw-driver_${{ github.ref_name }}.deb
+
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: hlt4000dw-driver_${{ github.ref_name }}.deb
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
