@@ -1,0 +1,19 @@
+#!/bin/sh
+# ESP Package Manager v4.1
+rm -f /tmp/hlt4000dw_latest_print_info
+if [ "$(which semanage 2> /dev/null)" != '' ];then
+semanage fcontext -d -t cupsd_rw_etc_t '/opt/brother/Printers/hlt4000dw/inf(/.*)?'
+semanage fcontext -d -t bin_t          '/opt/brother/Printers/hlt4000dw/lpd(/.*)?'
+semanage fcontext -d -t bin_t          '/opt/brother/Printers/hlt4000dw/cupswrapper(/.*)?'
+if [ "$(which restorecon 2> /dev/null)" != '' ];then
+restorecon -R /opt/brother/Printers/hlt4000dw
+fi
+fi
+if [ -e /etc/init.d/cups ]; then
+/etc/init.d/cups restart
+fi
+if [ -e /etc/init.d/lprng ]; then
+/etc/init.d/lprng restart
+elif [ -e /etc/init.d/lpd ]; then
+/etc/init.d/lpd restart
+fi

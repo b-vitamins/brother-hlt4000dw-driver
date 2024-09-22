@@ -1,0 +1,8 @@
+Package: hlt4000dwpdrv
+Version: 1.0.0-0
+Maintainer: Brother Industries, Ltd.
+Architecture: i386
+Description: Brother Inkjet Printer Driver 
+ Copyright: 2003-2018 Brother Industries, Ltd. All Rights Reserved 
+ Brother Inkjet Printer (LPR/CUPS) Driver 
+Conflicts: CONFLICT_PACKAGE

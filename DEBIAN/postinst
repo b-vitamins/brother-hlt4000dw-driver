@@ -1,0 +1,26 @@
+#!/bin/sh
+# ESP Package Manager v4.1
+/opt/brother/Printers/hlt4000dw/inf/setupPrintcapij hlt4000dw -i USB 
+/opt/brother/Printers/hlt4000dw/cupswrapper/cupswrapperhlt4000dw
+chmod 755 /opt/brother/Printers/hlt4000dw/cupswrapper
+if [ "$(which semanage 2> /dev/null)" != '' ];then
+semanage fcontext -a -t cupsd_rw_etc_t '/opt/brother/Printers/hlt4000dw/inf(/.*)?'
+semanage fcontext -a -t bin_t          '/opt/brother/Printers/hlt4000dw/lpd(/.*)?'
+semanage fcontext -a -t bin_t          '/opt/brother/Printers/hlt4000dw/cupswrapper(/.*)?'
+if [ "$(which restorecon 2> /dev/null)" != '' ];then
+restorecon -R /opt/brother/Printers/hlt4000dw
+fi
+fi
+if [ -e /etc/init.d/cups ]; then
+/etc/init.d/cups restart
+fi
+chmod 755 /opt/brother/Printers/hlt4000dw/lpd
+chmod 755 /opt/brother/Printers/hlt4000dw/inf
+chmod 755 /opt/brother/Printers/hlt4000dw/
+chmod 755 /opt/brother/Printers
+chmod 755 /opt/brother
+if [ -e /etc/init.d/lprng ]; then
+/etc/init.d/lprng restart
+elif [ -e /etc/init.d/lpd ]; then
+/etc/init.d/lpd restart
+fi

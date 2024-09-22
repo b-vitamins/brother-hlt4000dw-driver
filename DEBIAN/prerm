@@ -1,0 +1,4 @@
+#!/bin/sh
+# ESP Package Manager v4.1
+/opt/brother/Printers/hlt4000dw/cupswrapper/cupswrapperhlt4000dw -e
+/opt/brother/Printers/hlt4000dw/inf/setupPrintcapij hlt4000dw -e

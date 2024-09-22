@@ -1,0 +1,15 @@
+# Brother HL-T4000DW Driver License
+
+This software is distributed under the following licenses:
+
+1. **Brother End-User License Agreement (EULA)**:  
+   - The software provided here is based on Brother Industries, Ltd.'s HL-T4000DW printer drivers.
+   - Brother retains all rights to the software. By using this software, you agree to the terms outlined in the Brother EULA.
+   - You are granted a non-exclusive license to reproduce, distribute, modify, and create derivative works from the software, as per the EULA.
+   - The software is provided "AS IS" without warranties of any kind. Brother disclaims all liability for any damages arising from its use.
+   - The full text of the Brother EULA is provided in the file `LICENSE_ENG.txt` and `LICENSE_JPN.txt`.
+
+2. **GNU General Public License (GPL) Version 2**:  
+   - Portions of this software, specifically the files in the `<cupswrapper>` directory, are licensed under the GNU General Public License Version 2 (GPLv2).
+   - These files may be copied, distributed, and modified under the terms of GPLv2.
+   - You can find the full text of GPLv2 in the file `LICENSE_GPLv2.txt`, or online at [https://www.gnu.org/licenses/old-licenses/gpl-2.0.html](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html).
